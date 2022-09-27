@@ -1,0 +1,17 @@
+{
+  "name": "tetris",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "serve": "webpack serve --hot --config webpack.config.js --mode development",
+    "build:home": "export ENTRY_FILE_NAME=home && webpack --config webpack.config.js --mode production",
+    "build:about": "export ENTRY_FILE_NAME=about && webpack --config webpack.config.js --mode production"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^4.5.0",
+    "webpack": "^5.3.2",
+    "webpack-cli": "^4.1.0",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.3.0"
+  }
+}
