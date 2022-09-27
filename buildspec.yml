@@ -1,0 +1,32 @@
+version: 0.2
+
+env:
+  shell: bash
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+    on-failure: ABORT
+    commands:
+      - npm install
+  build:
+    on-failure: ABORT
+    commands:
+      - |
+        if [[ ($GITHUB_EVENT_NAME == "push") ]]; then 
+          npm run build
+        fi
+  post_build:
+    on-failure: ABORT
+    commands:
+      - |
+        if [[ ($GITHUB_EVENT_NAME == "push") ]]; then 
+          echo "do dome post build stuff with push event"
+        elif [[ ($GITHUB_EVENT_NAME == "pull_request") ]]; then 
+          echo "do dome post build stuff with pull request event"
+        fi
+
+cache:
+  paths:
+    - node_modules/**/*
