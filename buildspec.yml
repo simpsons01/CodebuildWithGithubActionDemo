@@ -20,8 +20,8 @@ phases:
       - echo "do some test in pre_build phase"
 
 batch:
-    fast-fail: true 
-    build-graph:
+  fast-fail: true 
+  build-graph:
     - identifier: install-phase
     - identifier: home-page-build
       buildspec: buildspec.home.yml
