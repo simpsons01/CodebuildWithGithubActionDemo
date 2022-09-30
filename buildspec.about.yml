@@ -8,6 +8,12 @@ env:
   shell: bash
 
 phases:
+    install:
+      runtime-versions:
+        nodejs: 16
+      on-failure: ABORT
+      commands:
+        - npm install
     build:
       on-failure: ABORT
       commands:
