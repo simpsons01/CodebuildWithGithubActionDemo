@@ -26,8 +26,8 @@ batch:
     - identifier: home_page_build
       buildspec: buildspec.home.yml
       depend-on:
-        - install-phase
+        - install_phase
     - identifier: about_page_build
       buildspec: buildspec.about.yml
       depend-on:
-        - install-phase
+        - install_phase
