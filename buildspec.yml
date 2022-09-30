@@ -1,5 +1,9 @@
 version: 0.2
 
+cache:
+  paths:
+    - node_modules/**/*
+
 env:
   shell: bash
 
@@ -10,23 +14,19 @@ phases:
     on-failure: ABORT
     commands:
       - npm install
-  build:
+  pre_build:
     on-failure: ABORT
     commands:
-      - |
-        if [[ ($GITHUB_EVENT_NAME == "push") ]]; then 
-          npm run build
-        fi
-  post_build:
-    on-failure: ABORT
-    commands:
-      - |
-        if [[ ($GITHUB_EVENT_NAME == "push") ]]; then 
-          echo "do dome post build stuff with push event"
-        elif [[ ($GITHUB_EVENT_NAME == "pull_request") ]]; then 
-          echo "do dome post build stuff with pull request event"
-        fi
-
-cache:
-  paths:
-    - node_modules/**/*
+      - echo "do some test in pre_build phase"
+  batch:
+     fast-fail: true 
+     build-graph:
+      - identifier: install-phase
+      - identifier: home-page-build
+        buildspec: buildspec.home.yml
+        depend-on:
+          - install-phase
+      - identifier: about-page-build
+        buildspec: buildspec.about.yml
+        depend-on:
+          - install-phase

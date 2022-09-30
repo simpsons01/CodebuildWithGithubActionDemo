@@ -27,6 +27,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: TEMPLATE,
+      publicPath: process.env.S3_URL
     }),
   ],
 };
