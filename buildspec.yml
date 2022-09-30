@@ -22,12 +22,12 @@ phases:
 batch:
   fast-fail: true 
   build-graph:
-    - identifier: install-phase
-    - identifier: home-page-build
+    - identifier: install_phase
+    - identifier: home_page_build
       buildspec: buildspec.home.yml
       depend-on:
         - install-phase
-    - identifier: about-page-build
+    - identifier: about_page_build
       buildspec: buildspec.about.yml
       depend-on:
         - install-phase
