@@ -18,15 +18,16 @@ phases:
     on-failure: ABORT
     commands:
       - echo "do some test in pre_build phase"
-  batch:
-     fast-fail: true 
-     build-graph:
-      - identifier: install-phase
-      - identifier: home-page-build
-        buildspec: buildspec.home.yml
-        depend-on:
-          - install-phase
-      - identifier: about-page-build
-        buildspec: buildspec.about.yml
-        depend-on:
-          - install-phase
+
+batch:
+    fast-fail: true 
+    build-graph:
+    - identifier: install-phase
+    - identifier: home-page-build
+      buildspec: buildspec.home.yml
+      depend-on:
+        - install-phase
+    - identifier: about-page-build
+      buildspec: buildspec.about.yml
+      depend-on:
+        - install-phase
