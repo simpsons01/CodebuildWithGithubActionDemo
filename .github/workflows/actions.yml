@@ -3,7 +3,7 @@ name: "Github Actions to notify aws codebuild execute"
 on:
   push:
     branches:
-      - xxxxxxx
+      - master
   pull_request:
     types:
       - opened
@@ -11,7 +11,7 @@ on:
       - reopened
       - synchronize
     branches:
-      - xxxxxxx
+      - master
 
 jobs:
   notify-codebuild:
