@@ -26,5 +26,5 @@ phases:
       commands:
         - |
           if [[ ($GITHUB_EVENT_NAME == "push") ]]; then 
-            aws s3 cp dist s3://${DEPLOY_S3_ARN}/about  --recursive 
+            aws s3 cp dist ${DEPLOY_S3_ARN}/about  --recursive 
           fi
