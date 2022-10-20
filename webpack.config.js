@@ -2,19 +2,31 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const ROOT = path.resolve(__dirname, "src");
-const DESTINATION = path.resolve(__dirname, "dist");
 const TEMPLATE = path.join(__dirname, "template/index.html")
+
+const config = {
+  about: {
+    filename: "about.js",
+    outputPath: path.resolve(__dirname, "dist/about"),
+    publicPath: "about"
+  },
+  home: {
+    filename: "home.js",
+    outputPath: path.resolve(__dirname, "dist/home"),
+    publicPath: "home"
+  }
+}
 
 module.exports = {
   context: ROOT,
 
   entry: {
-    main: `./${process.env.ENTRY_FILE_NAME}.js`,
+    main: `./${config[process.env.ENTRY].filename}`,
   },
 
   output: {
     filename: "[name].bundle.js",
-    path: DESTINATION,
+    path: config[process.env.ENTRY].outputPath,
   },
 
   resolve: {
@@ -27,7 +39,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: TEMPLATE,
-      publicPath: process.env.S3_URL
+      publicPath: `https://${process.env.CDN_URL}/${config[process.env.ENTRY].publicPath}`
     }),
   ],
 };

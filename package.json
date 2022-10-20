@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "serve": "webpack serve --hot --config webpack.config.js --mode development",
-    "build:home": "export ENTRY_FILE_NAME=home && webpack --config webpack.config.js --mode production",
-    "build:about": "export ENTRY_FILE_NAME=about && webpack --config webpack.config.js --mode production"
+    "build:home": "export ENTRY=home && webpack --config webpack.config.js --mode production",
+    "build:about": "export ENTRY=about && webpack --config webpack.config.js --mode production"
   },
   "devDependencies": {
     "html-webpack-plugin": "^4.5.0",
