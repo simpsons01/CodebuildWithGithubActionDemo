@@ -4,6 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "serve:home": "export NODE_ENV=development && export ENTRY=home && webpack serve --hot --config webpack.config.js --mode development",
+    "serve:about": "export NODE_ENV=development && export ENTRY=about && webpack serve --hot --config webpack.config.js --mode development",
     "build:home": "export ENTRY=home && webpack --config webpack.config.js --mode production",
     "build:about": "export ENTRY=about && webpack --config webpack.config.js --mode production"
   },
