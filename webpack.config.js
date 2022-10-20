@@ -12,7 +12,7 @@ const BuildConfig = {
     output: {
       path: path.resolve(__dirname, "dist/about")
     },
-    publicPath: `https://${process.env.CDN_URL}/about}`
+    publicPath: `https://${process.env.CDN_URL}/about`
   },
   home: {
     entry: {
@@ -21,7 +21,7 @@ const BuildConfig = {
     output: {
       path: path.resolve(__dirname, "dist/home")
     },
-    publicPath: `https://${process.env.CDN_URL}/home}`
+    publicPath: `https://${process.env.CDN_URL}/home`
   }
 }
 
