@@ -1,7 +1,6 @@
-const h1 = document.createElement("h1")
-h1.textContent = "this is about page"
-const p = document.createElement("p")
-p.textContent = "this is about page description"
+import { createDomText } from "./utils/dom"
+const title = createDomText("h1", "this is about page")
+const description = createDomText("p", "this is about page description")
 const app = document.querySelector("#app")
-app.appendChild(h1)
-app.appendChild(p)
+app.appendChild(title)
+app.appendChild(description)

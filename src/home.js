@@ -1,4 +1,4 @@
-const h1 = document.createElement("h1")
-h1.textContent = "this is home page"
+import { createDomText } from "./utils/dom"
+const title = createDomText("h1", "this is home page")
 const app = document.querySelector("#app")
-app.appendChild(h1)
+app.appendChild(title)

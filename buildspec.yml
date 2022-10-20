@@ -8,20 +8,26 @@ env:
   shell: bash
 
 phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+    on-failure: ABORT
+    commands:
+      - npm install
   pre_build:
     on-failure: ABORT
     commands:
-      - echo "do some test in pre_build phase"
+      - npm run test
 
 batch:
   fast-fail: true 
   build-graph:
-    - identifier: install_phase
+    - identifier: test_phase
     - identifier: home_page_build
       buildspec: buildspec.home.yml
       depend-on:
-        - install_phase
+        - test_phase
     - identifier: about_page_build
       buildspec: buildspec.about.yml
       depend-on:
-        - install_phase
+        - test_phase
