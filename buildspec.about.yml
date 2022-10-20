@@ -13,7 +13,10 @@ phases:
         nodejs: 16
       on-failure: ABORT
       commands:
-        - npm install
+        - |
+          if [[ ($GITHUB_EVENT_NAME == "push") ]]; then 
+            npm install
+          fi
     build:
       on-failure: ABORT
       commands:
