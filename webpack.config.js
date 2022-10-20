@@ -4,29 +4,39 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ROOT = path.resolve(__dirname, "src");
 const TEMPLATE = path.join(__dirname, "template/index.html")
 
-const config = {
+const BuildConfig = {
   about: {
-    filename: "about.js",
-    outputPath: path.resolve(__dirname, "dist/about"),
-    publicPath: "about"
+    entry: {
+      main: "./about.js"
+    },
+    output: {
+      path: path.resolve(__dirname, "dist/about")
+    },
+    publicPath: `https://${process.env.CDN_URL}/about}`
   },
   home: {
-    filename: "home.js",
-    outputPath: path.resolve(__dirname, "dist/home"),
-    publicPath: "home"
+    entry: {
+      main: "./home.js"
+    },
+    output: {
+      path: path.resolve(__dirname, "dist/home")
+    },
+    publicPath: `https://${process.env.CDN_URL}/home}`
   }
 }
+
+const config = BuildConfig[process.env.ENTRY]
 
 module.exports = {
   context: ROOT,
 
   entry: {
-    main: `./${config[process.env.ENTRY].filename}`,
+    main: config.entry.main
   },
 
   output: {
     filename: "[name].bundle.js",
-    path: config[process.env.ENTRY].outputPath,
+    path: config.output.path
   },
 
   resolve: {
@@ -39,7 +49,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: TEMPLATE,
-      publicPath: `https://${process.env.CDN_URL}/${config[process.env.ENTRY].publicPath}`
+      publicPath: config.publicPath
     }),
   ],
 };
