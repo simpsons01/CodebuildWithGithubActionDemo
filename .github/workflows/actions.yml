@@ -9,7 +9,6 @@ on:
       - opened
       - edited
       - reopened
-      - synchronize
     branches:
       - master
 
