@@ -30,4 +30,5 @@ phases:
         - |
           if [[ ($GITHUB_EVENT_NAME == "push") ]]; then 
             aws s3 cp dist s3://${DEPLOY_S3}  --recursive 
+            aws cloudfront create-invalidation --distribution-id EFSPLA2Q26I8Z --paths "/home/index.html"
           fi
