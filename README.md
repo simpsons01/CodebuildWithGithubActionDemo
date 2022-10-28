@@ -6,5 +6,5 @@
 [URL](https://ap-northeast-1.console.aws.amazon.com/codesuite/codebuild/171191418924/projects/DemoCodeBuildWithGithubDeploymentStack/history?region=ap-northeast-1&builds-meta=eyJmIjp7InRleHQiOiIifSwicyI6e30sIm4iOjIwLCJpIjowfQ) 
 
 ### aws 服務
-[repo](https://github.com/simpsons01/AwsServicesForCodeBuildWithGithubActionDemo)
+[REPO](https://github.com/simpsons01/AwsServicesForCodeBuildWithGithubActionDemo)
 
