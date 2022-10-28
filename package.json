@@ -1,0 +1,24 @@
+{
+  "name": "tetris",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "serve:home": "export NODE_ENV=development && export ENTRY=home && webpack serve --hot --config webpack.config.js --mode development",
+    "serve:about": "export NODE_ENV=development && export ENTRY=about && webpack serve --hot --config webpack.config.js --mode development",
+    "build:home": "export ENTRY=home && webpack --config webpack.config.js --mode production",
+    "build:about": "export ENTRY=about && webpack --config webpack.config.js --mode production"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.4",
+    "@jest/globals": "^29.2.1",
+    "html-webpack-plugin": "^4.5.0",
+    "jest": "^29.2.1",
+    "jest-environment-jsdom": "^29.2.1",
+    "webpack": "^5.3.2",
+    "webpack-cli": "^4.1.0",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.3.0"
+  }
+}

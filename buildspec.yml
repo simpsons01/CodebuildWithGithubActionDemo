@@ -1,0 +1,39 @@
+version: 0.2
+
+cache:
+  paths:
+    - node_modules/**/*
+
+env:
+  shell: bash
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+    on-failure: ABORT
+    commands:
+      - |
+        if [[ ($GITHUB_EVENT_NAME == "pull_request") ]]; then 
+          npm install
+        fi
+  pre_build:
+    on-failure: ABORT
+    commands:
+      - |
+        if [[ ($GITHUB_EVENT_NAME == "pull_request") ]]; then 
+          npm run test
+        fi
+
+batch:
+  fast-fail: true 
+  build-graph:
+    - identifier: test_phase
+    - identifier: home_page_build
+      buildspec: buildspec.home.yml
+      depend-on:
+        - test_phase
+    - identifier: about_page_build
+      buildspec: buildspec.about.yml
+      depend-on:
+        - test_phase
