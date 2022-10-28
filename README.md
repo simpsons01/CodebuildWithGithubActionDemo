@@ -8,3 +8,7 @@
 ### aws 服務
 [REPO](https://github.com/simpsons01/AwsServicesForCodeBuildWithGithubActionDemo)
 
+### 頁面url
+[HOME](https://d3f19k7bznh99m.cloudfront.net/home/index.html)
+[ABOUT](https://d3f19k7bznh99m.cloudfront.net/about/index.html)
+
