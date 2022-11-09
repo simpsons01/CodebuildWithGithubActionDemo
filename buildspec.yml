@@ -27,7 +27,7 @@ phases:
 
 batch:
   fast-fail: true 
-  build-graph:
+  build-list:
     - identifier: test_phase
     - identifier: home_page_build
       buildspec: buildspec.home.yml
