@@ -31,9 +31,5 @@ batch:
     - identifier: test_phase
     - identifier: home_page_build
       buildspec: buildspec.home.yml
-      depend-on:
-        - test_phase
     - identifier: about_page_build
       buildspec: buildspec.about.yml
-      depend-on:
-        - test_phase
