@@ -25,4 +25,4 @@ phases:
       commands:
         - |
           aws s3 cp dist s3://${DEPLOY_S3}  --recursive 
-          aws cloudfront create-invalidation --distribution-id EFSPLA2Q26I8Z --paths "/about/index.html"
+          aws cloudfront create-invalidation --distribution-id E1P0IZ5LAI7MXS --paths "/about/index.html"
