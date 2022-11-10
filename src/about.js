@@ -5,6 +5,7 @@ const description1 = createDomText("p", "this is about page description1")
 const description2 = createDomText("p", "this is about page description2")
 const description3 = createDomText("p", "this is about page description3")
 const description5 = createDomText("p", "this is about page description5")
+const description6 = createDomText("p", "this is about page description6")
 
 
 const app = document.querySelector("#app")
@@ -14,3 +15,4 @@ app.appendChild(description1)
 app.appendChild(description2)
 app.appendChild(description3)
 app.appendChild(description5)
+app.appendChild(description6)
