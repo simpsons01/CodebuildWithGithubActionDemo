@@ -1,5 +1,5 @@
 import { createDomText } from "./utils/dom"
-const title = createDomText("h1", "this is home page")
+const title = createDomText("h1", "this is home page title")
 const subTitle = createDomText("h2", "this is home page subTitle")
 const description = createDomText("p", "this is home page description")
 const footer = createDomText("p", "this is home page footer text")
