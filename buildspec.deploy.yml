@@ -1,0 +1,25 @@
+version: 0.2
+
+cache:
+  paths:
+    - node_modules/**/*
+
+env:
+  shell: bash
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+    on-failure: ABORT
+    commands:
+      - |
+        npm install
+
+batch:
+  fast-fail: true 
+  build-list:
+    - identifier: home_page_build
+      buildspec: buildspec.deploy.home.yml
+    - identifier: about_page_build
+      buildspec: buildspec.deploy.about.yml

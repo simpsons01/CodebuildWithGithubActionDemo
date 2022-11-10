@@ -16,8 +16,6 @@ jobs:
   notify-codebuild:
     runs-on: "ubuntu-18.04"
     steps:
-      - name: "list source code file"
-        run: ls
       - name: "dump GITHUB_CONTEXT"
         run: echo '${{ toJSON(github) }}'
       - name: "export COMMIT_ID to env"
@@ -36,6 +34,9 @@ jobs:
           aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
           aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY_ID"
           aws configure set default.region "$AWS_DEFAULT_REGION"
-          aws codebuild start-build-batch --project-name DemoCodeBuildWithGithubDeploymentStack \
-              --source-version "$COMMIT_ID" \
-              --environment-variables-override name=GITHUB_EVENT_NAME,value="$GITHUB_EVENT_NAME"
+          if [[ $GITHUB_EVENT_NAME == "push" ]]; then
+            aws codebuild start-build-batch --project-name DeployBuild --source-version "$COMMIT_ID"             
+          else
+            aws codebuild start-build --project-name PullRequestBuild --source-version "$COMMIT_ID" 
+          fi
+          
