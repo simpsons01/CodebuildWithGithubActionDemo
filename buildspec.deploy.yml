@@ -1,7 +1,6 @@
 version: 0.2
 
 batch:
-  fast-fail: true 
   build-list:
     - identifier: home_page_build
       buildspec: buildspec.deploy.home.yml
