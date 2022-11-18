@@ -19,7 +19,7 @@ phases:
       on-failure: ABORT
       commands:
         - |
-          npm run build:home
+          npm run wedwedwedwedwedt
     post_build:
       on-failure: ABORT
       commands:
