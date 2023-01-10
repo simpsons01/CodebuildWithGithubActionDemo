@@ -11,15 +11,14 @@ const getMergeRangeCommitId = () => {
   }
 } 
 
-const checkNodeModulesFileNotEmpty = () => {
+const checkNodeModulesExist = () => {
   return new Promise((resolve) => {
     const nodeModulesPath = path.join(__dirname, "../node_modules")
-    fs.readdir(nodeModulesPath, (err, files) => {
+    fs.readdir(nodeModulesPath, (err) => {
       if(err) {
         return resolve(false)
       }
-      const hasFiles = files.length > 0
-      resolve(hasFiles)
+      resolve(true)
     })
   })
 }
@@ -52,8 +51,8 @@ const checkPackageJsonModified = (start, end) => {
       if(stderr) {
         reject(stderr)
       }else {
-        const isPackageJsonInGitFileChange = stdout.split("\n").some(str => str === "package.json")
-        resolve(isPackageJsonInGitFileChange)
+        const isPackageJsonChanged = stdout.split("\n").some(str => str === "package.json")
+        resolve(isPackageJsonChanged)
       }
     })
   })
@@ -61,8 +60,8 @@ const checkPackageJsonModified = (start, end) => {
 
 const run = async () => {
   try {
-    const isNodeModuleNotEmpty = await checkNodeModulesFileNotEmpty()
-    if(isNodeModuleNotEmpty) {
+    const isNodeModuleExist = await checkNodeModulesExist()
+    if(isNodeModuleExist) {
       const { start: startCommitId, end: endCommitId } = getMergeRangeCommitId()
       const isPackageJsonModified = await checkPackageJsonModified(startCommitId, endCommitId)
       if(isPackageJsonModified) {
