@@ -58,6 +58,20 @@ const checkPackageJsonModified = (start, end) => {
   })
 }
 
+const listNodeModules = () => {
+  return new Promise((resolve, reject) => {
+    exec(`ls -a node_modules`, (error, stdout, stderr) => {
+      if(error) reject(error)
+      if(stderr) {
+        reject(stderr)
+      }else {
+        console.log(stdout)
+        resolve()
+      }
+    })
+  })
+}
+
 const run = async () => {
   try {
     const isNodeModuleExist = await checkNodeModulesExist()
@@ -72,9 +86,7 @@ const run = async () => {
         await installNodeModules()
       }else {
         console.log("use codebuild s3 cache node_modules")
-        exec("ls -a node_modules", (err, stdout) => {
-          console.log(stdout)
-        })
+        await listNodeModules()
       }
     }else {
       console.log("node modules does not exist, install node_modules......")
