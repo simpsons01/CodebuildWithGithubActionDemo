@@ -7,14 +7,12 @@ cache:
 env:
   shell: bash
 
-phases:
+phases:       
     install:
       runtime-versions:
         nodejs: 16
       on-failure: ABORT
-      commands:
-        # - |
-        #   npm install
+      commands: echo "ENTER INSTALL PHASE!"
     build:
       on-failure: ABORT
       commands: 

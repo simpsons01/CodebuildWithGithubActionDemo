@@ -12,9 +12,7 @@ phases:
       runtime-versions:
         nodejs: 16
       on-failure: ABORT
-      commands:
-        # - |
-        #   npm install
+      commands: echo "ENTER INSTALL PHASE!"
     build:
       on-failure: ABORT
       commands:
