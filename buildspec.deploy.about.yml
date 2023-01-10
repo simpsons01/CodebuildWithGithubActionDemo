@@ -14,6 +14,7 @@ phases:
       on-failure: ABORT
       commands:
         - |  
+          printenv
           node scripts/install.js
           git log --oneline
     build:
