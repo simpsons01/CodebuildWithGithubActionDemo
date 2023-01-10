@@ -11,14 +11,15 @@ const getMergeRangeCommitId = () => {
   }
 } 
 
-const checkNodeModulesExist = () => {
+const checkNodeModulesFile = () => {
   return new Promise((resolve) => {
     const nodeModulesPath = path.join(__dirname, "../node_modules")
-    fs.readdir(nodeModulesPath, (err) => {
+    fs.readdir(nodeModulesPath, (err, files) => {
       if(err) {
         return resolve(false)
       }
-      resolve(true)
+      const hasFiles = files.length > 0
+      resolve(hasFiles)
     })
   })
 }
@@ -58,24 +59,10 @@ const checkPackageJsonModified = (start, end) => {
   })
 }
 
-const listNodeModules = () => {
-  return new Promise((resolve, reject) => {
-    exec(`ls -a node_modules`, (error, stdout, stderr) => {
-      if(error) reject(error)
-      if(stderr) {
-        reject(stderr)
-      }else {
-        console.log(stdout)
-        resolve()
-      }
-    })
-  })
-}
-
 const run = async () => {
   try {
-    const isNodeModuleExist = await checkNodeModulesExist()
-    if(isNodeModuleExist) {
+    const isNodeModuleNotEmpty = await checkNodeModulesExist()
+    if(isNodeModuleNotEmpty) {
       const { start: startCommitId, end: endCommitId } = getMergeRangeCommitId()
       const isPackageJsonModified = await checkPackageJsonModified(startCommitId, endCommitId)
       if(isPackageJsonModified) {
@@ -86,7 +73,6 @@ const run = async () => {
         await installNodeModules()
       }else {
         console.log("use codebuild s3 cache node_modules")
-        await listNodeModules()
       }
     }else {
       console.log("node modules does not exist, install node_modules......")
