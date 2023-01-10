@@ -2,6 +2,15 @@ const fs = require("fs")
 const path = require("path")
 const { exec } = require("child_process")
 
+const getMergeRangeCommitId = () => {
+  const start = process.env.CODEBUILD_WEBHOOK_PREV_COMMIT
+  const end = process.env.CODEBUILD_RESOLVED_SOURCE_VERSION
+  return {
+    start,
+    end
+  }
+} 
+
 const checkNodeModulesExist = () => {
   return new Promise((resolve) => {
     const nodeModulesPath = path.join(__dirname, "../node_modules")
@@ -18,15 +27,23 @@ const installNodeModules = () => {
   return new Promise((resolve, reject) => {
     exec("npm install", (error, stdout, stderr) => {
       if(error) reject(error)
-      let stream
+      if(stderr) console.log(stderr)
+      else if(stdout) console.log(stdout)
+      resolve()
+    })
+  })
+}
+
+const checkPackageJsonModified = (start, end) => {
+  return new Promise((resolve, reject) => {
+    exec(`git log ${start}..${end} --oneline --pretty='format:' --name-only`, (error, stdout, stderr) => {
+      if(error) reject(error)
       if(stderr) {
-        console.log(stderr)
-        stream = stderr
+        reject(stderr)
       }else {
-        console.log(stdout)
-        stream = stdout
+        const isPackageJsonChanged = stdout.split("\n").some(str => str === "package.json")
+        resolve(isPackageJsonChanged)
       }
-      resolve(stream)
     })
   })
 }
@@ -35,12 +52,19 @@ const run = async () => {
   try {
     const isNodeModuleExist = await checkNodeModulesExist()
     if(isNodeModuleExist) {
-      console.log("node modules exist but install")
-      await installNodeModules()
+      const { start: startCommitId, end: endCommitId } = getMergeRangeCommitId()
+      const isPackageJsonModified = await checkPackageJsonModified(startCommitId, endCommitId)
+      if(isPackageJsonModified) {
+        console.log("package.json has been modified, reinstall node_modules")
+        await installNodeModules()
+      }else {
+        console.log("use codebuild cache node_modules")
+      }
     }else {
-      console.log("node modules not exist and do install")
+      console.log("node modules does not exist install")
       await installNodeModules()
     }
+    process.exit(0)
   }catch(error) {
     console.log(error)
     process.exit(1)
