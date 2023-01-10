@@ -7,7 +7,7 @@ const descriptionShine = createDomText("p", "this is Shine's test")
 const description2 = createDomText("p", "this is description 2")
 const description3 = createDomText("p", "this is description 3222333444")
 
-
+const ____ = ramda.isNil(null)
 const app = document.querySelector("#app")
 app.appendChild(title)
 app.appendChild(subTitle)

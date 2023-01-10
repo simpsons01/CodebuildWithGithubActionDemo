@@ -65,14 +65,16 @@ const run = async () => {
       const { start: startCommitId, end: endCommitId } = getMergeRangeCommitId()
       const isPackageJsonModified = await checkPackageJsonModified(startCommitId, endCommitId)
       if(isPackageJsonModified) {
-        console.log("package.json has been modified, reinstall node_modules")
+        console.log("package.json has been modified, delete cache and install node_modules")
+        console.log("delete node_modules......")
         await deleteNodeModules()
+        console.log("install node_modules......")
         await installNodeModules()
       }else {
         console.log("use codebuild s3 cache node_modules")
       }
     }else {
-      console.log("node modules does not exist, install node_modules")
+      console.log("node modules does not exist, install node_modules......")
       await installNodeModules()
     }
     process.exit(0)
