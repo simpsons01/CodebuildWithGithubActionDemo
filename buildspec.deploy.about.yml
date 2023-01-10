@@ -13,8 +13,8 @@ phases:
         nodejs: 16
       on-failure: ABORT
       commands:
-        - |
-          npm install
+        # - |
+        #   npm install
     build:
       on-failure: ABORT
       commands: 
