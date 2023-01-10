@@ -8,7 +8,7 @@ const description4 = createDomText("p", "this is home page description4")
 const description5 = createDomText("p", "this is home page description5")
 const description6 = createDomText("p", "this is home page description6")
 const description7 = createDomText("p", "this is home page descriptio")
-const footer = createDomText("p", "this is home page footer text")
+const footer = createDomText("p", "this is home page footer tex123t")
 
 const app = document.querySelector("#app")
 app.appendChild(title)
