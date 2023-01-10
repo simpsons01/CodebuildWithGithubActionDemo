@@ -72,6 +72,9 @@ const run = async () => {
         await installNodeModules()
       }else {
         console.log("use codebuild s3 cache node_modules")
+        exec("ls -a node_modules", (err, stdout) => {
+          console.log(stdout)
+        })
       }
     }else {
       console.log("node modules does not exist, install node_modules......")
