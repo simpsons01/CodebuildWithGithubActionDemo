@@ -23,6 +23,16 @@ const checkNodeModulesExist = () => {
   })
 }
 
+const deleteNodeModules = () => {
+  return new Promise((resolve, reject) => {
+    exec("rm -rf node_modules", (error, stdout, stderr) => {
+      if(error) return  reject(error)
+      if(stderr) return reject(stderr)
+      resolve()
+    })
+  })
+}
+
 const installNodeModules = () => {
   return new Promise((resolve, reject) => {
     exec("npm install", (error, stdout, stderr) => {
@@ -56,6 +66,7 @@ const run = async () => {
       const isPackageJsonModified = await checkPackageJsonModified(startCommitId, endCommitId)
       if(isPackageJsonModified) {
         console.log("package.json has been modified, reinstall node_modules")
+        await deleteNodeModules()
         await installNodeModules()
       }else {
         console.log("use codebuild s3 cache node_modules")

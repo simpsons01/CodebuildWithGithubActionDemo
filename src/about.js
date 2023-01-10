@@ -1,4 +1,4 @@
-import lodash from "lodash"
+import ramda from "ramda"
 import { createDomText } from "./utils/dom"
 const title = createDomText("h1", "this is about page")
 const subTitle = createDomText("h2", "this is about page subTitle")
