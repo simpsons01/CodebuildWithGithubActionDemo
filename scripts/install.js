@@ -14,7 +14,7 @@ const checkNodeModulesExist = () => {
   })
 }
 
-const doInstallNodeModules = () => {
+const installNodeModules = () => {
   return new Promise((resolve, reject) => {
     exec("npm install", (error, stdout, stderr) => {
       if(error) reject(error)
@@ -36,10 +36,10 @@ const run = async () => {
     const isNodeModuleExist = await checkNodeModulesExist()
     if(isNodeModuleExist) {
       console.log("node modules exist but install")
-      await doInstallNodeModules()
+      await installNodeModules()
     }else {
       console.log("node modules not exist and do install")
-      await doInstallNodeModules()
+      await installNodeModules()
     }
   }catch(error) {
     console.log(error)

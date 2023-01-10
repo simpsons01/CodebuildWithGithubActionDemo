@@ -15,6 +15,7 @@ phases:
       commands:
         - |  
           node scripts/install.js
+          git log --oneline
     build:
       on-failure: ABORT
       commands: 
