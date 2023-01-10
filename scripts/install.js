@@ -11,7 +11,7 @@ const getMergeRangeCommitId = () => {
   }
 } 
 
-const checkNodeModulesFile = () => {
+const checkNodeModulesFileNotEmpty = () => {
   return new Promise((resolve) => {
     const nodeModulesPath = path.join(__dirname, "../node_modules")
     fs.readdir(nodeModulesPath, (err, files) => {
@@ -61,7 +61,7 @@ const checkPackageJsonModified = (start, end) => {
 
 const run = async () => {
   try {
-    const isNodeModuleNotEmpty = await checkNodeModulesExist()
+    const isNodeModuleNotEmpty = await checkNodeModulesFileNotEmpty()
     if(isNodeModuleNotEmpty) {
       const { start: startCommitId, end: endCommitId } = getMergeRangeCommitId()
       const isPackageJsonModified = await checkPackageJsonModified(startCommitId, endCommitId)
