@@ -52,8 +52,8 @@ const checkPackageJsonModified = (start, end) => {
       if(stderr) {
         reject(stderr)
       }else {
-        const isPackageJsonChanged = stdout.split("\n").some(str => str === "package.json")
-        resolve(isPackageJsonChanged)
+        const isPackageJsonInGitFileChange = stdout.split("\n").some(str => str === "package.json")
+        resolve(isPackageJsonInGitFileChange)
       }
     })
   })

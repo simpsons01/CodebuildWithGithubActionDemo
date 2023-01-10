@@ -5,7 +5,7 @@ const subTitle = createDomText("h2", "this is about page subTitle")
 const description1 = createDomText("p", "this is description 1")
 const descriptionShine = createDomText("p", "this is Shine's test")
 const description2 = createDomText("p", "this is description 2")
-const description3 = createDomText("p", "this is description 3222333444")
+const description3 = createDomText("p", "this is description 322233344ffff4")
 
 const ____ = ramda.isNil(null)
 const app = document.querySelector("#app")
