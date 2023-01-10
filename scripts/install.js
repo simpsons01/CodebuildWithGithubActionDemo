@@ -72,8 +72,8 @@ const run = async () => {
       if(isPackageJsonModified) {
         console.log("package.json has been modified, reinstall node_modules")
         await installNodeModules()
-        console.log("invalidate codebuild cache")
-        await invalidateCodeBuildCache()
+        // console.log("invalidate codebuild cache")
+        // await invalidateCodeBuildCache()
       }else {
         console.log("use codebuild cache node_modules")
       }
