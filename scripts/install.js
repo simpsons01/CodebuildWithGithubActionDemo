@@ -48,6 +48,21 @@ const checkPackageJsonModified = (start, end) => {
   })
 }
 
+const invalidateCodeBuildCache = () => {
+  return new Promise((resolve, reject) => {
+    const codeBuildProjectName = process.env.CODEBUILD_BUILD_ID.split(":")[0]
+    exec(`aws codebuild invalidate-project-cache --project-name ${codeBuildProjectName}`, (error, stdout, stderr) => {
+      if(error) reject(error)
+      if(stderr) {
+        reject(stderr)
+      }else {
+        resolve()
+      }
+    })
+  })
+
+}
+
 const run = async () => {
   try {
     const isNodeModuleExist = await checkNodeModulesExist()
@@ -57,6 +72,8 @@ const run = async () => {
       if(isPackageJsonModified) {
         console.log("package.json has been modified, reinstall node_modules")
         await installNodeModules()
+        console.log("invalidate codebuild cache")
+        await invalidateCodeBuildCache()
       }else {
         console.log("use codebuild cache node_modules")
       }
